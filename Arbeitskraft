@@ -1,0 +1,78 @@
+package prak2;
+import java.util.ArrayList;
+
+public class Arbeitskraft {
+
+	ArrayList<Fuehrung> fuehrungskraft = new ArrayList<Fuehrung>();
+	
+	
+	private String abteilung;
+	private String name;
+	private int personalnummer;
+	private int gehalt;
+	private Fuehrung leiter;
+	
+	public Arbeitskraft(String name, String abteilung, int personalnummer, int gehalt) {
+		this.setAbteilung(abteilung);
+		this.setName(name);
+		this.setPersonalnummer(personalnummer);
+		this.setGehalt(gehalt);
+		
+	}
+	
+	//Wie fülle ich das aus?
+	//public void befehl(Fuehrung leiter) {
+			//}
+	
+	
+	
+	public void erhoehungGehalt(int erhoehung) {
+		this.gehalt = gehalt + erhoehung;
+		System.out.println("Dein Gehalt wurde auf "+this.gehalt + " EUR erhoeht.");
+	}
+	public void versetzeinabteilung(String versetzung) {
+		this.abteilung = versetzung;
+	}
+	
+	public void ausweis() {
+		System.out.println("Name: "+this.name + "\nAbteilung: "+this.abteilung + "\nPersonalnummer: "+this.gehalt);
+	}
+	
+	//Get-Methode
+	public String getAbteilung() {
+		return abteilung;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPersonalnummer() {
+		return personalnummer;
+	}
+
+	public int getGehalt() {
+		return gehalt;
+	}
+	
+	//Set-Methode
+	public void setAbteilung(String abteilung) {
+		this.abteilung = abteilung;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPersonalnummer(int personalnummer) {
+		this.personalnummer = personalnummer;
+	}
+
+	public void setGehalt(int gehalt) {
+		this.gehalt = gehalt;
+	}
+	
+	
+	
+	
+}
