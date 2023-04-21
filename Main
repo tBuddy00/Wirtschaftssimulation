@@ -1,3 +1,4 @@
+```java
 package prak2;
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
 		
 		System.out.println("\n");
 		gebaeude1.printInfo(); //Wie gebe ich die einzelnen Klassen aus?
-		
+```		
 		
 		
 		
