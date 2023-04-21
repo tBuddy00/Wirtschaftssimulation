@@ -1,0 +1,30 @@
+package prak2;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Arbeitskraft arbeitnehmer1 = new Arbeitskraft("Herr Slave, Dieter", "Konstruktion", 100999, 50000);
+		arbeitnehmer1.ausweis();
+		arbeitnehmer1.erhoehungGehalt(5000);
+	
+		
+		Gebaeude gebaeude1 = new Gebaeude("Dresden", "01037", 4);
+		Bueroraum bueroraum = new Bueroraum(310, 3, 10);
+		
+		//Gebäude werden Räume hinzugefügt und Mitartbeiter
+		gebaeude1.hinzufuegen(bueroraum);
+		bueroraum.hinzufuegen(arbeitnehmer1);
+		
+		Produktionsauftrag kundenbestellung1 = new Produktionsauftrag("Schmidt GmbH", "Kuchen", 300);
+		bueroraum.hinzufuegenBestellung(kundenbestellung1);
+		
+		
+		System.out.println("\n");
+		gebaeude1.printInfo(); //Wie gebe ich die einzelnen Klassen aus?
+		
+		
+		
+		
+		
+		
+		
