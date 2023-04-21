@@ -1,0 +1,65 @@
+package prak2;
+import java.util.ArrayList;
+
+public class Bueroraum {
+	
+	private ArrayList<Arbeitskraft> arbeitnehmer1 = new ArrayList<Arbeitskraft>();
+	private ArrayList<Produktionsauftrag> bestellung1  = new ArrayList<Produktionsauftrag>();
+	
+	private int raum;
+	private int etage;
+	private int kapazitaet;
+	private Arbeitskraft arbeitnehmer;
+	private Produktionsauftrag bestellung;
+
+	public Bueroraum(int raum, int etage, int kapazitaet){
+		this.raum = raum;
+		this.etage = etage;
+		this.kapazitaet = kapazitaet;		
+	}
+
+	
+	public void hinzufuegen(Arbeitskraft arbeitnehmer) {
+		if(arbeitnehmer1 != null) {
+			arbeitnehmer1.add(arbeitnehmer);
+		}
+	}
+	public void hinzufuegenBestellung(Produktionsauftrag bestellung) {
+		if(bestellung1 != null) {
+		bestellung1.add(bestellung);
+		
+		}
+	}
+		
+	
+	public int getEtage() {
+		return etage;
+	}
+
+	public void setEtage(int etage) {
+		this.etage = etage;
+	}
+
+	public int getKapazitaet() {
+		return kapazitaet;
+	}
+
+	public void setKapazitaet(int kapazitaet) {
+		this.kapazitaet = kapazitaet;
+	}
+
+	public int getRaum() {
+		return raum;
+	}
+	
+	public void setRaum(int raum) {
+		this.raum = raum;
+	}
+
+	
+	
+	
+	
+	
+	
+}
