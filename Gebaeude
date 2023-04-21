@@ -1,0 +1,66 @@
+package prak2;
+import java.util.ArrayList;
+
+
+public class Gebaeude {
+
+	private ArrayList<Bueroraum> geschaeftseinheit1 = new ArrayList<Bueroraum>();
+
+	private String ort;
+	private String plz;
+	private int wohneinheiten;
+	private Bueroraum bueroraum; // Zugriff auf Klasse Bueroraum 
+
+	public Gebaeude(String ort, String plz, int wohneinheiten){
+		this.setOrt(ort);
+		this.setPlz(plz);
+		this.setWohneinheiten(wohneinheiten);
+	}
+	//hinzufügen eines Buerorraums
+	public void hinzufuegen(Bueroraum bueroraum) {
+		if(geschaeftseinheit1 != null) {
+			geschaeftseinheit1.add(bueroraum);
+			
+		}
+	}
+	
+	public String getOrt() {
+		return ort;
+	}
+	
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public String getPlz() {
+		return plz;
+	}
+
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
+
+	public int getWohneinheiten() {
+		return wohneinheiten;
+	}
+
+	public void setWohneinheiten(int wohneinheiten) {
+		this.wohneinheiten = wohneinheiten;
+	}
+
+	public Bueroraum getBueroraum() {
+		return bueroraum;
+	}
+
+	public void setBueroraum(Bueroraum bueroraum) {
+		this.bueroraum = bueroraum;
+	}
+	
+	//Definition einer eigenen print-Funktion
+	public void printInfo() {
+		System.out.print("Alle Informationen zum Gebaeude: \nOrt: "+this.ort+"\nPLZ: "+this.plz+"\nWohneinheiten: "+this.wohneinheiten);
+	}
+	
+	
+	
+}
