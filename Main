@@ -1,28 +1,133 @@
 
 package prak2;
 
+import java.util.Iterator;
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) {
-		Arbeitskraft arbeitnehmer1 = new Arbeitskraft("Herr Slave, Dieter", "Konstruktion", 100999, 50000);
-		arbeitnehmer1.ausweis();
-		arbeitnehmer1.erhoehungGehalt(5000);
-	
 		
+		
+		Arbeitskraft arbeitnehmer1 = new Arbeitskraft("Herr Slave, Dieter", "Konstruktion", 50000, 100999);
 		Gebaeude gebaeude1 = new Gebaeude("Dresden", "01037", 4);
 		Bueroraum bueroraum = new Bueroraum(310, 3, 10);
-		
-		//Gebäude werden Räume hinzugefügt und Mitartbeiter
-		gebaeude1.hinzufuegen(bueroraum);
-		bueroraum.hinzufuegen(arbeitnehmer1);
-		
 		Produktionsauftrag kundenbestellung1 = new Produktionsauftrag("Schmidt GmbH", "Kuchen", 300);
-		bueroraum.hinzufuegenBestellung(kundenbestellung1);
+		Fuehrung leitung1 = new Fuehrung("Herr Anfuehrer, Herbert", 100220, "Management");
+		//Fuehrung leitung2 = new Fuehrung("Frau Meyer, Caro", 100440, "Management"); // NUR EIN BEISPIEL (falls mehr hinzukommen)
+		Abteilung abt1 = new Abteilung("Planung", 12);
+		
+		Niederlassung ortEinbeck = new Niederlassung("Einbeck", Warenart.BIER, 10);
+		Niederlassung ortWien = new Niederlassung("Wien", Warenart2.ROSÈ, 15);
+		Lager lagerAugsburg = new Lager("Augsburg");
+		Lager lagerSalzburg = new Lager("Salzburg");
+			
+		
+		//Begrüßung in das "Spiel"
+		System.out.println("Willkommen zur Wirtschaftssimulation\n");
+		
+		//Hereinlegen von Ware ins Lager -> Bier
+		ortEinbeck.produktionAngefordert(); 
+		ortEinbeck.produzieren(); //erst produzieren, dann das Ergebnis
+		ortEinbeck.setProduzierteMenge(100);
 		
 		
-		System.out.println("\n");
-		gebaeude1.printInfo(); //Wie gebe ich die einzelnen Klassen aus?
+		//WIEN
+		ortWien.produktionAngefordert();
+		ortWien.produktionAngefordert();
+		ortWien.setProduzierteMenge(200);
+		
+		//Was macht das?
+		int produzierteMengeEinbeck = ortEinbeck.abholen();	
+		Warenart produzierteWarenart = ortEinbeck.getWarenartProduktion();
+		
+		//WIEN
+		int produzierteMengeWien = ortWien.abholen();	
+		Warenart2 produzierteWarenartWien = ortWien.getWarenartWIENProduktion();
+		
+		//Ausgabe unseres Warenbestandes als Tabellenformat (ähnlich)
+		System.out.println("Ort: " + ortEinbeck.getOrt()+ "\tWare: "+ ortEinbeck.getWarenartProduktion() + "\tMenge: " + ortEinbeck.getProduzierteMenge());
+		
+		//WIEN
+		//Ausgabe unseres Warenbestandes als Tabellenformat (ähnlich)
+				System.out.println("Ort: " + ortWien.getOrt()+ "\tWare: "+ ortWien.getWarenartWIENProduktion() + "\tMenge: " + ortWien.getProduzierteMenge());
+		
+		
+		lagerAugsburg.einlagern(produzierteWarenart, produzierteMengeEinbeck);
+		lagerSalzburg.einlagernWien(produzierteWarenartWien, produzierteMengeWien);
+		
+		System.out.println("Aktueller Bestand im Lager: ");
 	
+		//Iteration durch unsere Waren, um zu sehen wie viele Waren vorhanden sind -> int
+		for(Iterator<Warenart> warenartIterator = lagerAugsburg.getEingelagerteWaren().iterator(); warenartIterator.hasNext();) {
+			Warenart warenart = (Warenart) warenartIterator.next();
+			System.out.println(Util.convertWarenartToString(warenart) + ": "+ lagerAugsburg.getBestand(warenart));
+		}
+		//WIEN
+		for(Iterator<Warenart2> warenartIteratorWien = lagerSalzburg.getWienEingelagerteWaren().iterator(); warenartIteratorWien.hasNext();) {
+			Warenart2 warenartWien = (Warenart2) warenartIteratorWien.next();
+			System.out.println(Util2.warentoString(warenartWien) + ": "+ lagerSalzburg.getBestandWien(warenartWien));
+		}
+		
+		
+		
+		int preis = 10;
+		int erloes = lagerAugsburg.verkaufen(produzierteWarenart,  produzierteMengeEinbeck, preis);
+		int erloeseWien = lagerSalzburg.verkaufen(produzierteWarenartWien, erloes, preis);
+		
+		//lagerAugsburg.verkaufen(produzierteWarenart, erloes, preis); //Wie verkaufen?
+		
+		
+		System.out.println("Erloes aus Einbeck: "+ erloes);
+		System.out.println("Erloese aus Wien: "+ erloeseWien);
+		
+		System.out.println("\nAktueller Bestand im Lager aus Augsburg: ");
+		//erneute Iteration -> nach Verkauf 
+		for(Iterator<Warenart> warenartIterator = lagerAugsburg.getEingelagerteWaren().iterator(); warenartIterator.hasNext();) {
+			Warenart warenart = (Warenart) warenartIterator.next();
+			System.out.print(Util.convertWarenartToString(produzierteWarenart) + ": "+ lagerAugsburg.getBestand(produzierteWarenart));
+		}
+		//WIEN
+		System.out.println("\nAktueller Bestand im Lager aus Salzburg: ");
+		//erneute Iteration -> nach Verkauf 
+		for(Iterator<Warenart2> warenartIteratorWien = lagerSalzburg.getWienEingelagerteWaren().iterator(); warenartIteratorWien.hasNext();) {
+			Warenart2 warenartWien = (Warenart2) warenartIteratorWien.next();
+			System.out.print(Util2.warentoString(produzierteWarenartWien) + ": "+ lagerSalzburg.getBestandWien(produzierteWarenartWien));
+		}
+		
+		
+//			//Gebäude dem Büro hinzufügen und individuelle Ausgabe
+//			gebaeude1.hinzufuegenBuero(bueroraum);
+//			gebaeude1.printAusgabe();
+//		
+//			System.out.println("\n");
+//			
+//
+//			//dem Büro Mitarbeiter hinzufügen und individuelle Ausgabe
+//			bueroraum.hinzufuegenArbeiter(arbeitnehmer1);
+//			bueroraum.ausgabeArbeiter();
+//			
+//			System.out.println("\n");
+//			
+//
+//			//dem Büro einen Produktionsauftrag hinzufügen und individuelle Ausgabe
+//			bueroraum.hinzufuegenBestellung(kundenbestellung1);
+//			bueroraum.ausgabeProduktionsauftrag();
+//	
+//			System.out.println("\n");
+//			
+//			//dem Büro eine Stationsleitung hinzufügen und individuelle Ausgabe
+//			bueroraum.hinzufuegenLeitung(leitung1);
+//			bueroraum.ausgabeLeitung();
+//			
+////			bueroraum.hinzufuegenLeitung(leitung2); // Gibt die zweite Leitung aus (Beispielhaft um darzustellen wie man mehrere Variablen darstellen kann
+////			bueroraum.ausgabeLeitung();
+//		
+//			System.out.println("\n");
+//			
+//			leitung1.hinzfuegenAbteilung(abt1);
+//			leitung1.ausgabeAbteilung(); //evtl. nicht benötigt 
+//		
 		
 		
 		
