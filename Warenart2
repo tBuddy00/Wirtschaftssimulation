@@ -1,0 +1,9 @@
+package prak2;
+
+public enum Warenart2 {
+
+	ROTWEIN,
+	ROSÈ,
+	WEISSWEIN,	
+	
+}
