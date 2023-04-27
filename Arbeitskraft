@@ -1,16 +1,15 @@
 package prak2;
-import java.util.ArrayList;
 
 public class Arbeitskraft {
 
-	ArrayList<Fuehrung> fuehrungskraft = new ArrayList<Fuehrung>();
+	
 	
 	
 	private String abteilung;
 	private String name;
 	private int personalnummer;
 	private int gehalt;
-	private Fuehrung leiter;
+	
 	
 	public Arbeitskraft(String name, String abteilung, int personalnummer, int gehalt) {
 		this.setAbteilung(abteilung);
@@ -19,11 +18,6 @@ public class Arbeitskraft {
 		this.setGehalt(gehalt);
 		
 	}
-	
-	//Wie fülle ich das aus?
-	//public void befehl(Fuehrung leiter) {
-			//}
-	
 	
 	
 	public void erhoehungGehalt(int erhoehung) {
