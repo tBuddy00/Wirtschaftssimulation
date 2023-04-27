@@ -1,0 +1,22 @@
+package prak2;
+
+public class Util2 {
+
+	public static String warentoString(Warenart2 warenart) {
+		return switch (warenart){
+			
+			case ROTWEIN -> {
+				yield "Rotwein";
+			}
+			case ROSÈ -> {
+				yield "Rosè";
+			}
+			case WEISSWEIN -> {
+				yield "Weißwein";
+			}	
+		};
+		
+	
+	}
+	
+}
